@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "name": "My lovely gateway",
+    "port": 8080,
+    "cache_ttl": 3600,
+    "timeout": "3s",
+    "endpoints": [
+        {
+            "endpoint": "/private/{user}",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "whitelist": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ],
+            "extra_config": {
+                "github.com/kpacha/krakend-http-auth": {
+                    "pass": "bar",
+                    "user": "foo"
+                }
+            }
+        },
+        {
+            "endpoint": "/public/{user}",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "https://api.github.com"
+                    ],
+                    "url_pattern": "/",
+                    "whitelist": [
+                        "authorizations_url",
+                        "code_search_url"
+                    ]
+                }
+            ]
+        }
+    ]
+}
