@@ -5,7 +5,7 @@ PACKAGES = $(shell go list ./... | grep -v /examples/)
 all: deps test build
 
 deps:
-	go get -uv github.com/devopsfaith/krakend/router/gin
+	go get -u github.com/devopsfaith/krakend/router/gin
 
 test:
 	go fmt ./...
