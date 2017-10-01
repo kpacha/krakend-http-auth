@@ -2,15 +2,28 @@
 
 HTTP Basic authentication midleware for the [KrakenD framework](https://github.com/devopsfaith/krakend).
 
-**This is not intended to be use in production! It is just a initial version of a possible KrakenD component**
+**This is not intended to be used in production! It is just a initial version of a possible KrakenD component**
 
 ## Usage
 
 Using this component is as easy as:
 
-1. Add the static credentials to your config file
+1. Add the static credentials to your config file. You must define on every endpoint to intercept.
 
-2. Decorate your `HandlerFactory` with the `auth.HandlerFactory`
+    "extra_config": {
+        "github.com/kpacha/krakend-http-auth": {
+            "pass": "bar",
+            "user": "foo"
+        }
+    }
+
+2. Import the right package for you. Tthere is a `HandlerFactory` implementation for the two basic routing libs: `mux` & `gin`.
+
+	import(
+		auth "github.com/devopsfaith/krakend/router/gin"
+	)
+
+3. Decorate your `HandlerFactory` with the `auth.HandlerFactory`
 
 Check the dummy implementation in the `example` dir. It contains a simple config file and a KrakenD api-gateway with the auth `HandlerFactory` wrapping the default endpoint factory.
 
@@ -30,7 +43,7 @@ Build it
 
 And run it
 
-	$ ./auth -l DEBUG -c krakend.json
+	$ ./auth -l DEBUG -c example/krakend.json
 
 From a new terminal, try to acces the private endpoint with and without the auth header
 
