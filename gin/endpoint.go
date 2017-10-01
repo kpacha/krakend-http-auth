@@ -11,6 +11,7 @@ import (
 	auth "github.com/kpacha/krakend-http-auth"
 )
 
+// HandlerFactory decorates a krakendgin.HandlerFactory with the auth layer
 func HandlerFactory(hf krakendgin.HandlerFactory) krakendgin.HandlerFactory {
 	return func(configuration *config.EndpointConfig, proxy proxy.Proxy) gin.HandlerFunc {
 		next := hf(configuration, proxy)

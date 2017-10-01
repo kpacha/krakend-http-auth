@@ -4,9 +4,25 @@ HTTP Basic authentication midleware for the [KrakenD framework](https://github.c
 
 **This is not intended to be use in production! It is just a initial version of a possible KrakenD component**
 
-## Example
+## Usage
+
+Using this component is as easy as:
+
+1. Add the static credentials to your config file
+
+2. Decorate your `HandlerFactory` with the `auth.HandlerFactory`
 
 Check the dummy implementation in the `example` dir. It contains a simple config file and a KrakenD api-gateway with the auth `HandlerFactory` wrapping the default endpoint factory.
+
+	krakendgin.Config{
+		Engine:         gin.Default(),
+		ProxyFactory:   proxy.DefaultFactory(logger),
+		Middlewares:    []gin.HandlerFunc{},
+		Logger:         logger,
+		HandlerFactory: auth.HandlerFactory(krakendgin.EndpointHandler),
+	}
+
+## Playing with the example
 
 Build it
 

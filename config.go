@@ -4,13 +4,16 @@ import (
 	"github.com/devopsfaith/krakend/config"
 )
 
+// Namespace is the key to look for extra configuration details
 const Namespace = "github.com/kpacha/krakend-http-auth"
 
+// Credentials contains the pair user:pass
 type Credentials struct {
 	User string
 	Pass string
 }
 
+// ConfigGetter extracts the credentials from the extra config details
 func ConfigGetter(e config.ExtraConfig) interface{} {
 	cfg, ok := e[Namespace]
 	if !ok {
