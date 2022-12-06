@@ -7,9 +7,7 @@ all: deps test build
 deps:
 	go get -u github.com/spf13/viper
 	go get -u github.com/op/go-logging
-	go get -u github.com/devopsfaith/krakend/router/gin
-	go get -u github.com/devopsfaith/krakend/router/mux
-
+	go get -u github.com/luraproject/lura/router/gin
 test:
 	go fmt ./...
 	go test -cover $(PACKAGES)
