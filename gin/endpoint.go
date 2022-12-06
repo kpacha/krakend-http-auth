@@ -5,7 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	auth "github.com/kpacha/krakend-http-auth"
+	auth "test"
+
 	"github.com/luraproject/lura/config"
 	"github.com/luraproject/lura/proxy"
 	luragin "github.com/luraproject/lura/router/gin"
