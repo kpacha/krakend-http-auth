@@ -5,14 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/devopsfaith/krakend/config"
-	"github.com/devopsfaith/krakend/proxy"
-	krakendgin "github.com/devopsfaith/krakend/router/gin"
 	auth "github.com/kpacha/krakend-http-auth"
+	"github.com/luraproject/lura/config"
+	"github.com/luraproject/lura/proxy"
+	luragin "github.com/luraproject/lura/router/gin"
 )
 
 // HandlerFactory decorates a krakendgin.HandlerFactory with the auth layer
-func HandlerFactory(hf krakendgin.HandlerFactory) krakendgin.HandlerFactory {
+func HandlerFactory(hf luragin.HandlerFactory) luragin.HandlerFactory {
 	return func(configuration *config.EndpointConfig, proxy proxy.Proxy) gin.HandlerFunc {
 		next := hf(configuration, proxy)
 

@@ -9,11 +9,11 @@ import (
 
 	authgin "test/gin"
 
-	"github.com/devopsfaith/krakend/proxy"
-	"github.com/devopsfaith/krakend/router"
-	krakendgin "github.com/devopsfaith/krakend/router/gin"
+	"github.com/luraproject/lura/config"
 	"github.com/luraproject/lura/logging"
-	"github.com/spf13/viper"
+	"github.com/luraproject/lura/proxy"
+	"github.com/luraproject/lura/router"
+	luragin "github.com/luraproject/lura/router/gin"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 	configFile := flag.String("c", "/etc/krakend/configuration.json", "Path to the configuration filename")
 	flag.Parse()
 
-	parser := viper.New()
+	parser := config.NewParser()
 	serviceConfig, err := parser.Parse(*configFile)
 	if err != nil {
 		log.Fatal("ERROR:", err.Error())
@@ -41,12 +41,12 @@ func main() {
 
 	var routerFactory router.Factory
 
-	routerFactory = krakendgin.NewFactory(krakendgin.Config{
+	routerFactory = luragin.NewFactory(luragin.Config{
 		Engine:         gin.Default(),
 		ProxyFactory:   proxy.DefaultFactory(logger),
 		Middlewares:    []gin.HandlerFunc{},
 		Logger:         logger,
-		HandlerFactory: authgin.HandlerFactory(krakendgin.EndpointHandler),
+		HandlerFactory: authgin.HandlerFactory(luragin.EndpointHandler),
 	})
 
 	routerFactory.New().Run(serviceConfig)
